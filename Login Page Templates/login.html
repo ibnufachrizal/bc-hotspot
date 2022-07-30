@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<title>BANTENCYBER NETWORK | Login</title>
+	<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" content="-1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+ 
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+
+  </head>
+  <body>
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post">
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+    <script type="text/javascript" src="js/md5.js"></script>
+    
+    <script type="text/javascript">
+    
+function doLogin() {
+document.sendin.username.value = document.login.username.value;
+document.sendin.password.value = hexMD5('$(chap-id)' + document.login.username.value + '$(chap-challenge)');
+document.sendin.submit();
+return false;
+}
+    </script>
+    $(endif)
+
+  
+<nav class="navbar navbar-default example6 navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar6">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand text-hide" href="login.html">Brand Text
+        </a>
+      </div>
+      <div id="navbar6" class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav navbar-right" >
+
+		  <li style="text-align:right;"><a href="login.html"><b><font color="#00aeff">Login</font></b></a></li>
+		  <li style="text-align:right;"><a href="paket.html">Voucher Hotspot</a></li>
+
+		  <li style="text-align:right;"><a href="rumah.html">Internet Rumah</a></li>
+		  <li style="text-align:right;"><a href="faq.html">FAQ</a></li>
+		  <li style="text-align:right;"><a href="support.html">Support</a></li>
+
+	
+        </ul>
+      </div>
+   
+    </div>
+
+  </nav> 		
+		
+		
+<div class="container">
+ <div class="col-md-10 col-md-offset-1 well" style="padding:0px;">
+ 
+
+ <div class="col-md-4" style="margin-top:15px;">
+ <center>
+<img src="img/logo.png" class="img-responsive" style="margin-bottom:10px;"/>
+<p class="sedang">Silahkan login agar terhubung layanan internet kami</p>
+
+$(if error)
+	<div style="color:#DF1A23; font-weight:bold; margin-bottom:5px;" class="kecil">
+		<script type="text/javascript">
+			var error = "$(error)";
+			var error1 = "user $(username) has reached uptime limit";
+			var error2 = "invalid password";
+			var error3 = "no valid profile found";
+			var error4 = "user &lt;$(username)&gt; not found";
+			var error5 = "no more sessions are allowed for user $(username)";
+			var error6 = "session limit reached ($(error-orig))";
+			var error7 = "web browser did not send challenge response (try again, enable JavaScript)";
+			var error8 = "invalid username or password";
+			var error9 = "user $(username) is not allowed to log in from this MAC address";
+			var error10 = "simultaneous session limit reached";
+			var error11 = "user $(username) has reached traffic limit";
+			var error12 = "uptime limit reached";
+			
+			if (error == error1){
+				window.location.href = "expired.html";
+			} else if (error == error2){
+				window.location.href = "exaktif.html";
+			} else if (error == error3){
+				window.location.href = "expired.html";
+			} else if (error == error4){
+				window.location.href = "exnotfound.html";
+			} else if (error == error5){
+				window.location.href = "exterpakai.html";
+			} else if (error == error6){
+				document.write("ID Voucher $(username) sudah mencapai batas limit");
+			} else if (error == error7){
+				document.write("Ooops...Browser pada perangkat anda mengalami masalah, silahkan restart dan ulangi kembali");
+			} else if (error == error8){
+				window.location.href = "exaktif.html";
+			} else if (error == error9){
+				document.write("Perangkat anda $(mac) tidak memiliki akses login dengan ID Voucher $(username), silahkan beli kode voucher baru");
+			} else if (error == error10){
+				window.location.href = "exterpakai.html";
+			} else if (error == error11){
+				window.location.href = "exkuota.html";
+			} else if (error == error12){
+				window.location.href = "expired.html";
+			}else {
+				document.write("$(error)");
+			} 
+		</script>
+	</div> 
+$(endif)
+
+
+
+<!--Login-->
+<form name="login" action="$(link-login-only)" method="post"
+					    $(if chap-id) onSubmit="return doLogin()" $(endif)>
+						<input type="hidden" name="dst" value="$(link-orig)" />
+						<input type="hidden" name="popup" value="true" />
+						
+	<input type="text" class="masukan text-center form-control" name="username" autocomplete="off" placeholder="MASUKAN KODE VOUCHER" value="$(username)" >
+	<input type="hidden" class="masukan text-center form-control" name="password" placeholder="PASSWORD">
+
+  $(if logged-in == 'yes')
+  <button class="btn abu-tua tombol-49 disabled" type="button"><span class="glyphicon glyphicon-remove"></span>&nbsp; TRIAL LIMITED</button>
+  $(else) 
+  $(if trial == 'yes')
+  <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)"
+   data-toggle="tooltip" data-placement="top" ><button class="btn merah tombol-49" type="button"><span class="glyphicon glyphicon-ok"></span> &nbsp; FREE TRIAL </button></a>
+  $(else)
+  <button class="btn abu-tua tombol-49 disabled" type="button" data-toggle="popover" data-placement="top" data-content="Server Offline"><span class="glyphicon glyphicon-remove"></span>&nbsp; TRIAL LIMITED</button>
+  $(endif)
+  $(endif)
+<button type="submit" class="btn tombol-49 hijau-muda" ><span class="glyphicon glyphicon-log-in"></span>&nbsp; LOGIN</button>
+<br><br>
+<button type="button" onclick="window.location='https://laksa19.github.io/myqr';" class="btn tombol-99 hijau-tosca" ><span class="glyphicon glyphicon-log-in"></span>&nbsp; QR CODE</button>
+</form>
+<!--Login-->
+
+
+
+
+
+<div class="kecil" style="margin-top:5px;">
+<font color="#52565e">Perhatikan penulisan <b>huruf besar dan kecil</b><br>cara aktivasi <b>voucher</b> silahkan</font> <a href="aktivasi.html"><b><font color="#00aeff">klik disini</font></b></a></small>
+</div>
+
+
+<hr style="margin-top:10px;">
+<div class="sedang">
+ <span class="blink">
+<b>gunakan internet dengan bijak <b><font color="#0099e5">siapapun user yg sering terdeteksi </font></b><br><b><font color="#0099e5">INTERNET POSITIF (pornografi) </font></b> akan kami blokir tanpa peringatan </b>
+</span>
+</div>
+ <hr>
+
+ </center>
+ </div>
+
+<div class="col-md-8" style="padding:0px; margin-bottom:3px;">
+
+<script>
+	$('.carousel').carousel({
+		interval: 4000
+	})
+</script>
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" >
+  <!-- Indicators -->
+  <ol class="carousel-indicators" >
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active" style="background:transparent; border:none;"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1" style="background:transparent; border:none;"></li>
+	<li data-target="#carousel-example-generic" data-slide-to="2" style="background:transparent; border:none;"></li>
+	<li data-target="#carousel-example-generic" data-slide-to="3" style="background:transparent; border:none;"></li>
+
+  </ol>
+ 
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="img/banerku.jpg" alt="..."> 
+    </div>
+	
+    <div class="item">
+      <img src="img/banerku1.jpg" alt="...">
+    </div>
+	
+	
+	
+  </div>
+ 
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"  style="background:transparent;">
+
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"  style="background:transparent;">
+
+  </a>
+</div> <!-- Carousel -->
+
+
+<div class="sedang">
+<marquee scrollamount="3" style="margin-bottom:-8px;"><font color="#555">
+Kami menyediakan berbagai macam pilihan <b>Paket Internet Murah</b> yang bisa anda pilih sesuai dengan kebutuhan, untuk melakukan pembelian <b>Voucher Hotspot dan Berlangganan Paket Internet Rumah</b> silahkan hubungi kami.
+Semua paket internet kami <b>Unlimited Tanpa Batasan Quota</b>
+</font></marquee>
+</div>	
+
+ </div>
+ 
+
+
+</div>	
+</div>	
+
+<div class="col-md-4 col-md-offset-4 text-center sedang">
+  <span class='credit-link'>Copyright © BANTENCYBER NETWORK | All Right Reserved<a class='login' href='https://google.com/' id='login' title='Personal Blog'></a></span>
+  </div>
+  
+      <!-- jQuery -->
+      <script src="js/jquery.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrapmincss.js"></script>
+    <script src="js/modal.js"></script>
+
+
+ <style>
+.blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+</style> 
+ 
+
+	
+
+  </body>
+</html>
